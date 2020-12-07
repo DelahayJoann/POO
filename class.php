@@ -76,7 +76,7 @@ class Form{
 
     /**
      * Expected parameters
-     * @param string $name of the input
+     * @param string $name name of the input
      * @param string $text value of the input
      * @param string $type type of the input
      */
@@ -96,7 +96,7 @@ class Form{
 
     /**
      * Expected parameters
-     * @param string $name of the input
+     * @param string $name name of the input
      * @param array $options an array of a string for each option
      */
     function select(string $name, array $options){
@@ -117,7 +117,7 @@ class Form{
 
     /**
      * Expected parameters
-     * @param string $name of the input
+     * @param string $name name of the input
      * @param int $rows number of rows
      * @param int $cols number of cols
      */
@@ -135,7 +135,7 @@ class Form{
         $this->form->appendChild($input);
     }
 
-    // close and return the form
+    // Add submit button and return the form
     function getForm(){
         $input = $this->dom->createElement('button','Send');
         $domAttribute = $this->dom->createAttribute('type');
@@ -148,6 +148,143 @@ class Form{
         $this->dom->appendChild($this->form);
 
         return $this->dom->saveHTML();
+    }
+}
+
+class Html{
+    function __construct(){
+    }
+
+    /**
+     * Expected parameters
+     * @param string $path path of stylesheet
+     */
+    function linkCSS(string $path){
+        $dom = new DOMDocument('1.0');
+
+        $link = $dom->createElement('link');
+
+        $domAttribute = $dom->createAttribute('rel');
+        $domAttribute->value = "stylesheet";
+        $link->appendChild($domAttribute);
+
+        $domAttribute = $dom->createAttribute('href');
+        $domAttribute->value = $path;
+        $link->appendChild($domAttribute);
+        
+        $dom->appendChild($link);
+        return $dom->saveHTML();
+    }
+
+    /**
+     * Expected parameters
+     * @param string $name name of meta
+     * @param string $content content of meta
+     */
+    function meta(string $name, string $content){
+        $dom = new DOMDocument('1.0');
+
+        $meta = $dom->createElement('meta');
+
+        $domAttribute = $dom->createAttribute('name');
+        $domAttribute->value = $name;
+        $meta->appendChild($domAttribute);
+
+        $domAttribute = $dom->createAttribute('content');
+        $domAttribute->value = $content;
+        $meta->appendChild($domAttribute);
+        
+        $dom->appendChild($meta);
+
+        return $dom->saveHTML();
+    }
+
+    /**
+     * Expected parameters
+     * @param string $src source link
+     * @param string $alt (OPTIONAL) alt of image
+     */
+    function image(string $src, string $alt = ""){
+        $dom = new DOMDocument('1.0');
+
+        $img = $dom->createElement('img');
+
+        $domAttribute = $dom->createAttribute('src');
+        $domAttribute->value = $src;
+        $img->appendChild($domAttribute);
+
+        $domAttribute = $dom->createAttribute('alt');
+        $domAttribute->value = $alt;
+        $img->appendChild($domAttribute);
+        
+        $dom->appendChild($img);
+
+        return $dom->saveHTML();
+    }
+
+    /**
+     * Expected parameters
+     * @param string $href target path of link
+     * @param string $inner innerHTML of «a»
+     */
+    function a(string $href, string $inner){
+        $dom = new DOMDocument('1.0');
+
+        $a = $dom->createElement('a',$inner);
+
+        $domAttribute = $dom->createAttribute('href');
+        $domAttribute->value = $href;
+        $a->appendChild($domAttribute);
+
+        $dom->appendChild($a);
+
+        return $dom->saveHTML();
+    }
+
+    /**
+     * Expected parameters
+     * @param string $src target path to script (.js,...)
+     */
+    function script(string $src){
+        $dom = new DOMDocument('1.0');
+
+        $script = $dom->createElement('script');
+
+        $domAttribute = $dom->createAttribute('src');
+        $domAttribute->value = $src;
+        $script->appendChild($domAttribute);
+
+        $dom->appendChild($script);
+
+        return $dom->saveHTML();
+    }
+}
+class Validator{
+    function __construct(){}
+
+    function validateEmail($email){
+        return filter_var($email,FILTER_VALIDATE_EMAIL);
+    }
+    function validateURL($url){
+        return filter_var($email,FILTER_VALIDATE_URL);
+    }
+    function validateFloat($float){
+        return filter_var($email,FILTER_VALIDATE_FLOAT);
+    }
+    function validateInt($int){
+        return filter_var($int,FILTER_VALIDATE_INT);
+    }
+    function validateBoolean($bool){
+        return filter_var($bool,FILTER_VALIDATE_BOOLEAN);
+    }
+    function validateIP($ip){
+        return filter_var($email,FILTER_VALIDATE_IP);
+    }
+    function validateMAC($mac){
+        return filter_var($mac,FILTER_VALIDATE_MAC);
+    }
+    function validateString($string){
+        return filter_var($string,FILTER_VALIDATE_REGEXP,array("options" => array("regexp"=>"/^[a-zA-Z0-9_-]+$/")));
     }
 }
 ?>
