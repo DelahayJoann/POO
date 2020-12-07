@@ -40,6 +40,7 @@ class Post{
         $conn = Connexion::connect("localhost", "becode", "Joann", "becode");
         $qry = $conn->prepare("INSERT INTO blog VALUES (:id,:title,:content);");
         $qry->execute(array(':id'=> NULL, ':title'=> $this->title_post, ':content'=> $this->content_post));
+        $this->id_post = $conn->lastInsertId();
         return $conn->lastInsertId();
     }
     function removePost():int{ //return 0 if failed or 1+ if succeed
