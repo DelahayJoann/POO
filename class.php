@@ -287,4 +287,80 @@ class Validator{
         return filter_var($string,FILTER_VALIDATE_REGEXP,array("options" => array("regexp"=>"/^[a-zA-Z0-9_-]+$/")));
     }
 }
+
+class Voiture{
+    private $numImma,$dateMiseCirc,$kilometrage,$modele,$marque,$couleur,$poids,$status,$type,$pays,$usure,$annee;
+
+    /**
+     * Expected parameters
+     * @param string $numImma Numéro d'immatriculation du véhicule
+     * @param DateTime $dateMiseCirc Date de mise en circulation du véhicule
+     * @param float $kilometrage Kilomètrage du véhicule
+     * @param string $modele Modèle du véhicule
+     * @param string $marque Marque du véhicule
+     * @param string $couleur Couleur du véhicule
+     * @param float $poids Poids en Tonne du véhicule
+     */
+    function __construct(string $numImma,DateTime $dateMiseCirc,float $kilometrage,string $modele,string $marque,string $couleur,float $poids){
+        $this->numImma = $numImma;
+        $this->dateMiseCirc = $dateMiseCirc;
+        $this->kilometrage = $kilometrage;
+        $this->modele = $modele;
+        $this->marque = $marque;
+        $this->couleur = $couleur;
+        $this->poids = $poids;
+
+        $this->status = ($this->marque == "Audi")? "reserved" : "free";
+        $this->type = ($this->poids > 3.5)? "utilitaire" : "commerciale";
+        switch(substr($this->numImma,0,2)){
+            case "BE": $this->pays = "Belgique";break;
+            case "FR": $this->pays = "France";break;
+            case "DE": $this->pays = "Allemagne";break;
+        }
+        checkUsure();
+        $this->annee = floor(abs(strtotime(date("Y/m/d"))-strtotime($this->dateMiseCirc)) / (365*60*60*24));
+    }
+    function checkUsure(){
+        switch(true){
+            case $this->kilometrage < 100000: $this->usure = "low";
+            case $this->kilometrage > 100000: $this->usure = "middle";
+            case $this->kilometrage > 200000: $this->usure = "high";
+        }
+    }
+
+    function setKilometrage(float $kilometrage){
+        $this->kilometrage = $kilometrage;
+        checkUsure();
+    }
+    function getKilometrage(){
+        return $this->kilometrage;
+    }
+
+    function setCouleur(string $couleur){
+        $this->couleur = $couleur;
+    }
+    function getCouleur(){
+        return $this->couleur;
+    }
+
+    function setPoids(float $poids){
+        $this->couleur = $couleur;
+    }
+    function getPoids(){
+        return $this->poids;
+    }
+
+    function getNumImma(){
+        return $this->numImma;
+    }
+    function getDateMiseCirc(){
+        return $this->dateMiseCirc;
+    }
+    function getModele(){
+        return $this->modele;
+    }
+    function getMarque(){
+        return $this->marque;
+    }
+}
 ?>
