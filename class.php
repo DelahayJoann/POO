@@ -262,28 +262,28 @@ class Html{
 class Validator{
     function __construct(){}
 
-    function validateEmail($email){
+    static function validateEmail($email){
         return filter_var($email,FILTER_VALIDATE_EMAIL);
     }
-    function validateURL($url){
+    static function validateURL($url){
         return filter_var($email,FILTER_VALIDATE_URL);
     }
-    function validateFloat($float){
+    static function validateFloat($float){
         return filter_var($email,FILTER_VALIDATE_FLOAT);
     }
-    function validateInt($int){
+    static function validateInt($int){
         return filter_var($int,FILTER_VALIDATE_INT);
     }
-    function validateBoolean($bool){
+    static function validateBoolean($bool){
         return filter_var($bool,FILTER_VALIDATE_BOOLEAN);
     }
-    function validateIP($ip){
+    static function validateIP($ip){
         return filter_var($email,FILTER_VALIDATE_IP);
     }
-    function validateMAC($mac){
+    static function validateMAC($mac){
         return filter_var($mac,FILTER_VALIDATE_MAC);
     }
-    function validateString($string){
+    static function validateString($string){
         return filter_var($string,FILTER_VALIDATE_REGEXP,array("options" => array("regexp"=>"/^[a-zA-Z0-9_-]+$/")));
     }
 }
