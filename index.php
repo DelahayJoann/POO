@@ -39,5 +39,6 @@ echo "Nombre d'entrée dans la table «blog» de la DB «becode»: ".$myConnexio
 
 
     <br><br><a href="./generateHTML.php">GenerateHTML</a><br>
+    <br><br><a href="./parc_voitures.php">Parc Voiture</a><br>
 </body>
 </html>
