@@ -88,7 +88,7 @@ class Voiture{
 
         $td1 = $dom->createElement('td',$this->numImma);
         $td1->appendChild($domAttr1);
-        $td2 = $dom->createElement('td',$this->dateMiseCirc->format('y/m/d'));
+        $td2 = $dom->createElement('td',$this->dateMiseCirc->format('Y/m/d'));
         $td2->appendChild($domAttr2);
         $td3 = $dom->createElement('td',$this->kilometrage);
         $td3->appendChild($domAttr3);
