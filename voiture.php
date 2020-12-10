@@ -123,7 +123,7 @@ class Voiture{
 
     function setKilometrage(float $kilometrage){
         $this->kilometrage = $kilometrage;
-        checkUsure();
+        $this->checkUsure();
     }
     function getKilometrage(){
         return $this->kilometrage;

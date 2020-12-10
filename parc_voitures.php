@@ -53,18 +53,18 @@ $voiture9->setImage("https://www.largus.fr/images/photos/rsi/_G_JPG/Voitures/AUD
         </thead>
         <tbody>
             <?php
-                /* echo $voiture1->Display();
-                echo $voiture2->Display();
-                echo $voiture3->Display();
-                echo $voiture4->Display();
-                echo $voiture5->Display();
-                echo $voiture6->Display();
-                echo $voiture7->Display();
-                echo $voiture8->Display();
-                echo $voiture9->Display(); */
+                /* echo $voiture1->display();
+                echo $voiture2->display();
+                echo $voiture3->display();
+                echo $voiture4->display();
+                echo $voiture5->display();
+                echo $voiture6->display();
+                echo $voiture7->display();
+                echo $voiture8->display();
+                echo $voiture9->display(); */
 
                 foreach(Voiture::getInstances_() as $instance){
-                    echo $instance->Display();
+                    echo $instance->display();
                 }
             ?>
         </tbody>
