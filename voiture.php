@@ -2,6 +2,7 @@
 
 class Voiture{
     private $numImma,$dateMiseCirc,$kilometrage,$modele,$marque,$couleur,$poids,$status,$type,$pays,$usure,$annee,$image;
+    static private $instance_ = [];
 
     /**
      * Expected parameters
@@ -31,7 +32,14 @@ class Voiture{
         }
         $this->checkUsure();
         $this->annee = (new \DateTime())->diff($this->dateMiseCirc);
+
+        Self::$instance_[] = $this;
     }
+
+    static function getInstances_(){
+        return SELF::$instance_;
+    }
+
     private function checkUsure(){
         switch(true){
             case $this->kilometrage < 100000: $this->usure = "low";
@@ -110,7 +118,7 @@ class Voiture{
 
     function roule(){
         $this->kilometrage += 100000;
-        $this->usure = "high";
+        $this->checkUsure();
     }
 
     function setKilometrage(float $kilometrage){
